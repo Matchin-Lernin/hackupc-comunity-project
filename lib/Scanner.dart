@@ -41,7 +41,7 @@ class _ScannerState extends State<Scanner> {
                 await showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
-                    title: Text("Callback at the end of animation: $str"),
+                    title: Text("Do you want to enter to local HACKUPC?"),
                     actions: [
                       FlatButton(
                         child: Text('OK'),
@@ -74,7 +74,6 @@ class _ScannerState extends State<Scanner> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 FlatButton(
-                  color: Colors.deepPurpleAccent,
                   child: Text('Flash'),
                   onPressed: () {
                     controller.toggleFlash();
@@ -82,7 +81,6 @@ class _ScannerState extends State<Scanner> {
                 ),
                 const SizedBox(width: 10),
                 FlatButton(
-                  color: Colors.deepPurpleAccent,
                   child: Text('Flip'),
                   onPressed: () {
                     controller.flipCamera();
@@ -90,7 +88,6 @@ class _ScannerState extends State<Scanner> {
                 ),
                 const SizedBox(width: 10),
                 FlatButton(
-                  color: Colors.deepPurpleAccent,
                   child: Text('Resume'),
                   onPressed: () {
                     controller.resume();
