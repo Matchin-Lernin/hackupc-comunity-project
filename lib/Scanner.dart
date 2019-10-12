@@ -27,11 +27,12 @@ class _ScannerState extends State<Scanner> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: _buildBar(context),
       body: Column(
         children: [
           Expanded(
             child: AnimatedQRView(
-              squareColor: Colors.green.withOpacity(0.25),
+              squareColor: Colors.deepPurpleAccent.withOpacity(0.25),
               animationDuration: const Duration(milliseconds: 400),
               onScanBeforeAnimation: (String str) {
                 print('Callback at the beginning of animation: $str');
@@ -73,7 +74,7 @@ class _ScannerState extends State<Scanner> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 FlatButton(
-                  color: Colors.blue,
+                  color: Colors.deepPurpleAccent,
                   child: Text('Flash'),
                   onPressed: () {
                     controller.toggleFlash();
@@ -81,7 +82,7 @@ class _ScannerState extends State<Scanner> {
                 ),
                 const SizedBox(width: 10),
                 FlatButton(
-                  color: Colors.blue,
+                  color: Colors.deepPurpleAccent,
                   child: Text('Flip'),
                   onPressed: () {
                     controller.flipCamera();
@@ -89,7 +90,7 @@ class _ScannerState extends State<Scanner> {
                 ),
                 const SizedBox(width: 10),
                 FlatButton(
-                  color: Colors.blue,
+                  color: Colors.deepPurpleAccent,
                   child: Text('Resume'),
                   onPressed: () {
                     controller.resume();
@@ -100,6 +101,14 @@ class _ScannerState extends State<Scanner> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildBar(BuildContext context) {
+    return new AppBar(
+      title: new Text("MusiQ"),
+      centerTitle: true,
+      backgroundColor: Colors.deepPurple,
     );
   }
 }

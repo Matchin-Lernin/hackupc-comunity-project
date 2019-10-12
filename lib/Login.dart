@@ -41,14 +41,17 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: _buildBar(context),
-      body: new Container(
-        padding: EdgeInsets.all(16.0),
-        child: new Column(
-          children: <Widget>[
+      body: new ListView(
+        padding: EdgeInsets.all(20.0),
+          children: 
+          <Widget>[
+            SizedBox(height: 50),
+            Image(image: AssetImage("assets/images/musiQ.png")),
+            SizedBox(height: 100),
             _buildTextFields(),
+            SizedBox(height: 20),
             _buildButtons(),
           ],
-        ),
       ),
     );
   }
@@ -57,6 +60,7 @@ class _LoginPageState extends State<LoginPage> {
     return new AppBar(
       title: new Text("MusiQ"),
       centerTitle: true,
+      backgroundColor: Colors.deepPurple,
     );
   }
 
@@ -65,7 +69,13 @@ class _LoginPageState extends State<LoginPage> {
       child: new Column(
         children: <Widget>[
           new Container(
-            child: new TextField(
+            child: new TextFormField(
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Please enter some text';
+                }
+                return null;
+              },
               controller: _nicknameFilter,
               decoration: new InputDecoration(
                 labelText: 'NickName'

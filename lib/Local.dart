@@ -19,9 +19,7 @@ class LocalScreen extends StatelessWidget {
     _makeGetRequest(_localId);
     // Use the Todo to create the UI.
     return Scaffold(
-      appBar: AppBar(
-        title: Text(_localId),
-      ),
+      appBar: _buildBar(context),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Text(_localId),
@@ -35,5 +33,13 @@ class LocalScreen extends StatelessWidget {
     print(newMusic);
     String url = 'http://04f46746.ngrok.io/add/$_email/$_localId/$newMusic';
     get(url);
+  }
+
+  Widget _buildBar(BuildContext context) {
+    return new AppBar(
+      title: new Text("MusiQ"),
+      centerTitle: true,
+      backgroundColor: Colors.deepPurple,
+    );
   }
 }
