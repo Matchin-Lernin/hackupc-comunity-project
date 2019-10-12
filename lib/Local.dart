@@ -31,7 +31,7 @@ class LocalScreen extends StatelessWidget {
 
    _makeGetRequest(String idLocal) async {
     // make GET request
-    var newMusic = _music.replaceAll(new RegExp(r'\s*,\s*'), '-');
+    var newMusic = _music.replaceAll(new RegExp(r'\s*,\s*'), '-').replaceAll(new RegExp(r'(\s|\-)+'), '_').replaceAll(new RegExp(r'\s*,\s*'), '-');
     print(newMusic);
     String url = 'http://04f46746.ngrok.io/add/$_email/$_localId/$newMusic';
     get(url);

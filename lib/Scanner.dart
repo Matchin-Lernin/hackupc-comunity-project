@@ -1,23 +1,26 @@
 import 'package:animated_qr_code_scanner/animated_qr_code_scanner.dart';
 import 'package:animated_qr_code_scanner/AnimatedQRViewController.dart';
 import 'package:flutter/material.dart';
-import 'package:hackupc19/Edit.dart';
 import 'package:hackupc19/Local.dart';
 
 
 class Scanner extends StatefulWidget {
   var _email = "";
-  Scanner(String email){
+  var _music = "";
+  Scanner(String email, String music){
     this._email = email;
+    this._music = music;
   }
   @override
-  State<StatefulWidget> createState() => new _ScannerState(_email);
+  State<StatefulWidget> createState() => new _ScannerState(_email, _music);
 }
 
 class _ScannerState extends State<Scanner> {
   var _email = "";
-  _ScannerState(String email){
+  var _music = "";
+  _ScannerState(String email, String music){
     this._email = email;
+    this._music = music;
   }
   final AnimatedQRViewController controller = AnimatedQRViewController();
 
@@ -46,7 +49,7 @@ class _ScannerState extends State<Scanner> {
                           Navigator.of(context).pop();
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                             builder: (context) => LocalScreen(str, _email, "Stupid, Patata, Chiquilicuatre"),
+                             builder: (context) => LocalScreen(str, _email, _music),
                             ),
                           );
                         },
@@ -92,12 +95,6 @@ class _ScannerState extends State<Scanner> {
                     controller.resume();
                   },
                 ),
-                const SizedBox(width: 10),
-                FlatButton(
-                  color: Colors.blue,
-                  child: Text('Edit Profile'),
-                  onPressed: _editProfile,
-                ),
               ],
             ),
           ),
@@ -105,13 +102,4 @@ class _ScannerState extends State<Scanner> {
       ),
     );
   }
-
-  void _editProfile () {
-    print('The user wants to edit the profile');
-    Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => EditPage()),);
-  }
-
- 
 }
