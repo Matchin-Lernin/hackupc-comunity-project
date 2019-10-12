@@ -1,9 +1,15 @@
 import 'package:animated_qr_code_scanner/animated_qr_code_scanner.dart';
 import 'package:animated_qr_code_scanner/AnimatedQRViewController.dart';
 import 'package:flutter/material.dart';
+import 'package:hackupc19/Edit.dart';
+import 'package:hackupc19/Login.dart';
+class Scanner extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => new _ScannerState();
+}
 
-class Scanner extends StatelessWidget {
-    final AnimatedQRViewController controller = AnimatedQRViewController();
+class _ScannerState extends State<Scanner> {
+  final AnimatedQRViewController controller = AnimatedQRViewController();
 
   @override
   Widget build(BuildContext context) {
@@ -81,11 +87,24 @@ class Scanner extends StatelessWidget {
                     controller.resume();
                   },
                 ),
+                const SizedBox(width: 10),
+                FlatButton(
+                  color: Colors.blue,
+                  child: Text('Edit Profile'),
+                  onPressed: _editProfile,
+                ),
               ],
             ),
           ),
         ],
       ),
     );
+  }
+
+  void _editProfile () {
+    print('The user wants to edit the profile');
+    Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => EditPage()),);
   }
 }

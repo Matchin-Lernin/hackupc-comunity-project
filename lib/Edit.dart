@@ -1,32 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:hackupc19/Login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'Scanner.dart';
 
-class LoginPage extends StatefulWidget {
+class EditPage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => new _LoginPageState();
+  State<StatefulWidget> createState() => new _EditPageState();
 }
 
-// Used for controlling whether the user is loggin or creating an account
-enum FormType {
-  login,
-  register
-}
 
-class _LoginPageState extends State<LoginPage> {
+class _EditPageState extends State<EditPage> {
 
-  final TextEditingController _emailFilter = new TextEditingController();
-  final TextEditingController _passwordFilter = new TextEditingController();
-  final TextEditingController _musicFilter = new TextEditingController();
   String _email = "";
   String _password = "";
   String _music = "";
-  FormType _form = FormType.login; // our default setting is to login, and we should switch to creating an account when the user chooses to
+  final TextEditingController _emailFilter = new TextEditingController();
+  final TextEditingController _passwordFilter = new TextEditingController();
+  final TextEditingController _musicFilter = new TextEditingController();  
 
-  _LoginPageState() {
+  _EditPageState() {
+    _load();
     _emailFilter.addListener(_emailListen);
+    _emailFilter.text=_email;
     _passwordFilter.addListener(_passwordListen);
+    _passwordFilter.text=_password;
     _musicFilter.addListener(_musicListen);
+    _musicFilter.text=_music;
+    
   }
 
   void _emailListen() {
@@ -53,17 +52,6 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  // Swap in between our two forms, registering and logging in
-  void _formChange () async {
-    setState(() {
-      if (_form == FormType.login) {
-        _form = FormType.register;
-      }else{
-        _form = FormType.login;
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -88,31 +76,6 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _buildTextFields() {
-    if (_form == FormType.login) {
-    return new Container(
-      child: new Column(
-        children: <Widget>[
-          new Container(
-            child: new TextField(
-              controller: _emailFilter,
-              decoration: new InputDecoration(
-                labelText: 'Email'
-              ),
-            ),
-          ),
-          new Container(
-            child: new TextField(
-              controller: _passwordFilter,
-              decoration: new InputDecoration(
-                labelText: 'Password'
-              ),
-              obscureText: true,
-            ),
-          )
-        ],
-      ),
-    );
-    }else{
       return new Container(
       child: new Column(
         children: <Widget>[
@@ -120,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
             child: new TextField(
               controller: _emailFilter,
               decoration: new InputDecoration(
-                labelText: 'Email'
+                labelText: 'Email',
               ),
             ),
           ),
@@ -130,7 +93,6 @@ class _LoginPageState extends State<LoginPage> {
               decoration: new InputDecoration(
                 labelText: 'Password'
               ),
-              obscureText: true,
             ),
           ),
           new Container(
@@ -139,60 +101,42 @@ class _LoginPageState extends State<LoginPage> {
               decoration: new InputDecoration(
                 labelText: 'Music'
               ),
-              obscureText: true,
             ),
           )
         ],
       ),
     );
-    }
   }
 
   Widget _buildButtons() {
-    if (_form == FormType.login) {
       return new Container(
         child: new Column(
           children: <Widget>[
             new RaisedButton(
-              child: new Text('Login'),
-              onPressed: _loginPressed,
+              child: new Text('Edit profile'),
+              onPressed: _editAccountPressed,
+              //TODO: ojo aquí
             ),
             new FlatButton(
-              child: new Text('Dont have an account? Tap here to register.'),
-              onPressed: _formChange,
+              child: new Text('Logout?'),
+              onPressed: _logoutPressed,
             )
           ],
         ),
       );
-    } else {
-      return new Container(
-        child: new Column(
-          children: <Widget>[
-            new RaisedButton(
-              child: new Text('Create an Account'),
-              onPressed: _createAccountPressed,
-            ),
-            new FlatButton(
-              child: new Text('Have an account? Click here to login.'),
-              onPressed: _formChange,
-            )
-          ],
-        ),
-      );
-    }
   }
 
   // These functions can self contain any user auth logic required, they all have access to _email and _password
 
-  void _loginPressed () {
+  void _logoutPressed () {
     print('The user wants to login with $_email and $_password');
     Navigator.push(
     context,
-    MaterialPageRoute(builder: (context) => Scanner()),);
+    MaterialPageRoute(builder: (context) => LoginPage()),);
   }
 
 
-  void _createAccountPressed () {
+  void _editAccountPressed () {
     print('The user wants to create an accoutn with $_email and $_password');
     _save();
   }
