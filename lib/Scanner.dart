@@ -2,13 +2,23 @@ import 'package:animated_qr_code_scanner/animated_qr_code_scanner.dart';
 import 'package:animated_qr_code_scanner/AnimatedQRViewController.dart';
 import 'package:flutter/material.dart';
 import 'package:hackupc19/Edit.dart';
-import 'package:hackupc19/Login.dart';
+import 'package:hackupc19/Local.dart';
+
+
 class Scanner extends StatefulWidget {
+  var _email = "";
+  Scanner(String email){
+    this._email = email;
+  }
   @override
-  State<StatefulWidget> createState() => new _ScannerState();
+  State<StatefulWidget> createState() => new _ScannerState(_email);
 }
 
 class _ScannerState extends State<Scanner> {
+  var _email = "";
+  _ScannerState(String email){
+    this._email = email;
+  }
   final AnimatedQRViewController controller = AnimatedQRViewController();
 
   @override
@@ -36,12 +46,7 @@ class _ScannerState extends State<Scanner> {
                           Navigator.of(context).pop();
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => Scaffold(
-                                body: Align(
-                                  alignment: Alignment.center,
-                                  child: Text("$str"),
-                                ),
-                              ),
+                             builder: (context) => LocalScreen(str, _email, "Stupid, Patata, Chiquilicuatre"),
                             ),
                           );
                         },
@@ -107,4 +112,6 @@ class _ScannerState extends State<Scanner> {
     context,
     MaterialPageRoute(builder: (context) => EditPage()),);
   }
+
+ 
 }

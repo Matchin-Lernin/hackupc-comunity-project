@@ -188,7 +188,7 @@ class _LoginPageState extends State<LoginPage> {
     print('The user wants to login with $_email and $_password');
     Navigator.push(
     context,
-    MaterialPageRoute(builder: (context) => Scanner()),);
+    MaterialPageRoute(builder: (context) => Scanner(_email)),);
   }
 
 
